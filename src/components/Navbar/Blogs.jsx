@@ -32,7 +32,7 @@ const Blogs = () => {
     // ]
 
     useEffect(() => {
-        fetch("http://localhost:5000/articles")
+        fetch("https://daily-planet-server.vercel.app/articles")
             .then(res => res.json())
             .then(data => setBlogs(data))
     }, []);
@@ -64,7 +64,7 @@ const Blogs = () => {
                                     <p className="text-2xl font-bold leading-5">{blog.title.slice(0, 25)}...</p>
                                 </a>
                                 <p className="mb-4 text-gray-700">
-                                    {blog.description.slice(0,140)}...
+                                    {blog.description.slice(0, 140)}...
                                 </p>
                                 <div className="flex space-x-4">
                                     <div className="flex items-center">

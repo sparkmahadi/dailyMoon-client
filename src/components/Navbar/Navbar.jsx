@@ -28,6 +28,7 @@ const navigation = [
     { name: 'Home', href: '/', current: true },
     { name: 'Articles', href: '/articles', current: false },
     { name: 'Reading History', href: '/reading-history', current: false },
+    { name: 'Add article', href: '/articles/add', current: false },
 ]
 const userNavigation = [
     { name: 'Your Profile', href: '#' },
