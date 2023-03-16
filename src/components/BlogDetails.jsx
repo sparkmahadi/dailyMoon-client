@@ -32,10 +32,11 @@ const BlogDetails = () => {
                         aria-label="Article"
                         className="inline-block mb-3 text-black transition-colors duration-200 hover:text-deep-purple-accent-700"
                     >
-                        <p className="text-2xl font-bold leading-5">{article.title}...</p>
+                        <p className="text-2xl font-bold leading-5">{article.title}</p>
                     </a>
                     <p className="mb-4 text-gray-700">
-                        {article.description}...
+                        {article.content}
+                        {article.description}
                     </p>
                     <div className="flex space-x-4">
                         <div className="flex items-center">

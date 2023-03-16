@@ -1,43 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import loadArticlesData from './../redux/thunk/fetchArticles';
+import Spinner from './Spinner';
 
 const Blogs = () => {
-    const [blogs, setBlogs] = useState([]);
-
-    // const blogs = [
-    //     {
-    //         img: "https://images.pexels.com/photos/932638/pexels-photo-932638.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=3&amp;h=750&amp;w=1260",
-    //         postedDate: '13 Jul 2020',
-    //         title: "Diving to the deep",
-    //         description: "Sed ut perspiciatis unde omnis iste natus error sit sed quia consequuntur magni voluptatem doloremque.",
-    //         likes: 74,
-    //         comments: 20
-    //     },
-    //     {
-    //         img: "https://images.pexels.com/photos/1576937/pexels-photo-1576937.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;w=500",
-    //         postedDate: '13 Jul 2020',
-    //         title: "Diving to the deep",
-    //         description: "Sed ut perspiciatis unde omnis iste natus error sit sed quia consequuntur magni voluptatem doloremque.",
-    //         likes: 74,
-    //         comments: 20
-    //     },
-    //     {
-    //         img: "https://images.pexels.com/photos/2123755/pexels-photo-2123755.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260",
-    //         postedDate: '13 Jul 2020',
-    //         title: "Diving to the deep",
-    //         description: "Sed ut perspiciatis unde omnis iste natus error sit sed quia consequuntur magni voluptatem doloremque.",
-    //         likes: 74,
-    //         comments: 20
-    //     },
-    // ]
+    const dispatch = useDispatch();
+    const blogs = useSelector(state => state.articles);
+    const loading = useSelector(state => state.loadingArticles);
 
     useEffect(() => {
-        fetch("https://daily-planet-server.vercel.app/articles")
-            .then(res => res.json())
-            .then(data => setBlogs(data))
-    }, []);
+        dispatch(loadArticlesData());
+    }, [dispatch]);
 
-    console.log(blogs);
+    console.log(loading);
+
+    if(loading){
+        return <Spinner></Spinner>
+    }
     return (
         <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
             <div className="grid gap-5 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
