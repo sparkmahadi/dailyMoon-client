@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import loadArticlesData from './../redux/thunk/fetchArticles';
 import Spinner from './Spinner';
+import deleteArticle from './../redux/thunk/deleteArticle';
 
 const Blogs = () => {
     const dispatch = useDispatch();
@@ -14,6 +15,14 @@ const Blogs = () => {
     }, [dispatch]);
 
     console.log(loading);
+
+    const removeArticle = blog =>{
+        const confirmation = window.confirm("Are you sure to delete the news?")
+
+        if(confirmation){
+            dispatch(deleteArticle(blog))
+        }
+    }
 
     if(loading){
         return <Spinner></Spinner>
@@ -67,6 +76,11 @@ const Blogs = () => {
                                             <p className="text-sm font-medium leading-4 text-gray-600">
                                                 Author
                                             </p>
+                                        </div>
+
+                                        <div>
+                                            <Link to={`update/${blog._id}`}><button className="btn">Edit</button></Link>
+                                            <button onClick={()=>removeArticle(blog)} className="btn">Delete</button>
                                         </div>
                                     </div>
 

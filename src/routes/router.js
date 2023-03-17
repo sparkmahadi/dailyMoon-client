@@ -3,6 +3,7 @@ import Blogs from "../components/Blogs";
 import Main from "../layouts/Main";
 import BlogDetails from './../components/BlogDetails';
 import AddArticle from './../components/AddArticle';
+import UpdateArticle from './../components/UpdateArticle';
 
 const router = createBrowserRouter([
     {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
                 path: '/articles/add',
                 element: <AddArticle></AddArticle>
             },
+            {
+                path: '/articles/update/:id',
+                element: <UpdateArticle></UpdateArticle>
+            }
         ]
     }
 ])

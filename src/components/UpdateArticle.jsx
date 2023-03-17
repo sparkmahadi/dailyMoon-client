@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch } from 'react-redux';
-import addArticle from './../redux/thunk/addArticle';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import fetchArticleDetails from './../redux/thunk/fetchArticleDetails';
+import updateArticle from './../redux/thunk/updateArticle';
 
-const AddArticle = () => {
+const UpdateArticle = () => {
     const { register, handleSubmit } = useForm();
     const dispatch = useDispatch();
 
+    const {id} = useParams();
+    const article = useSelector(state => state.articleDetails);
+    console.log(article);
+
+    useEffect(()=>{
+        dispatch(fetchArticleDetails(id))
+    },[dispatch, id])
+
     const submit = (data) => {
-        const article = {
+        const newArticle = {
+            ...article,
             author: data.author,
             content: data.content,
             title: data.title,
@@ -16,9 +27,9 @@ const AddArticle = () => {
             description: data.description
         };
 
-        console.log(article);
+        console.log(newArticle);
 
-        dispatch(addArticle(article));
+        dispatch(updateArticle(newArticle));
     };
 
     return (
@@ -31,35 +42,35 @@ const AddArticle = () => {
                     <label className='mb-2' htmlFor='author'>
                         Author
                     </label>
-                    <input type='text' id='author' {...register("author")} />
+                    <input defaultValue={article ? article.author : null} type='text' id='author' {...register("author")} />
                 </div>
 
                 <div className='flex flex-col w-full max-w-xs'>
                     <label className='mb-2' htmlFor='title'>
                         Title
                     </label>
-                    <input type='text' id='title' {...register("title")} />
+                    <input defaultValue={article ? article.title : null} type='text' id='title' {...register("title")} />
                 </div>
 
                 <div className='flex flex-col w-full max-w-xs'>
                     <label className='mb-3' htmlFor='content'>
                         Content
                     </label>
-                    <textarea className="h-32" type='text' id='content' {...register("content")} />
+                    <textarea defaultValue={article ? article.content : null} className="h-32" type='text' id='content' {...register("content")} />
                 </div>
 
                 <div className='flex flex-col w-full max-w-xs'>
                     <label className='mb-3' htmlFor='urlToImage'>
                         ImageURL
                     </label>
-                    <input type='text' id='urlToImage' {...register("urlToImage")} />
+                    <input defaultValue={article ? article.urlToImage : null} type='text' id='urlToImage' {...register("urlToImage")} />
                 </div>
 
                 <div className='flex flex-col w-full max-w-xs'>
                     <label className='mb-3' htmlFor='description'>
                         Description
                     </label>
-                    <input type='text' id='description' {...register("description")} />
+                    <input defaultValue={article ? article.description : null} type='text' id='description' {...register("description")} />
                 </div>
 
 
@@ -76,4 +87,4 @@ const AddArticle = () => {
     );
 };
 
-export default AddArticle;
+export default UpdateArticle;

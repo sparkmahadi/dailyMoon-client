@@ -1,9 +1,16 @@
-import { GET_CONTENT, UPDATE_CONTENT } from "../actionTypes/actionTypes"
+import { GET_CONTENT, GET_CONTENT_DETAILS, UPDATE_CONTENT } from "../actionTypes/actionTypes"
 import { ADD_CONTENT, DELETE_CONTENT, LOADING_CONTENT } from './../actionTypes/actionTypes';
 
 export const loadArticles = (data) =>{
     return{
         type: GET_CONTENT,
+        payload: data
+    }
+};
+
+export const loadArticleDetails = (data) =>{
+    return{
+        type: GET_CONTENT_DETAILS,
         payload: data
     }
 };

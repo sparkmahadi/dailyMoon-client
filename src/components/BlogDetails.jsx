@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import fetchArticleDetails from './../redux/thunk/fetchArticleDetails';
 
 const BlogDetails = () => {
-    const [article, setArticle] = useState({});
+    // const [article, setArticle] = useState({});
+    const article = useSelector(state => state.articleDetails)
+    const dispatch = useDispatch();
     const { id } = useParams();
 
     useEffect(() => {
-        fetch(`https://daily-planet-server.vercel.app/articles/${id}`)
-            .then(res => res.json())
-            .then(data => setArticle(data))
-    }, [id]);
+        dispatch(fetchArticleDetails(id))
+    }, [dispatch, id]);
 
     console.log(article);
     return (
