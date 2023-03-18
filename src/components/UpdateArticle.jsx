@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { ToastContainer } from "react-toastify";
 import fetchArticleDetails from './../redux/thunk/fetchArticleDetails';
 import updateArticle from './../redux/thunk/updateArticle';
 
@@ -18,14 +19,28 @@ const UpdateArticle = () => {
     },[dispatch, id])
 
     const submit = (data) => {
-        const newArticle = {
-            ...article,
-            author: data.author,
-            content: data.content,
-            title: data.title,
-            urlToImage: data.urlToImage,
-            description: data.description
+        let newArticle = {
+            ...article
         };
+
+        if(data.author){
+            newArticle.author = data.author
+        }
+        if(data.content){
+            newArticle.content = data.content
+        }
+        if(data.title){
+            newArticle.title = data.title
+        }
+        if(data.urlToImage){
+            newArticle.urlToImage = data.urlToImage
+        }
+        if(data.description){
+            newArticle.description = data.description
+        }
+        if(data.tags){
+            newArticle.tags = data.tags
+        }
 
         console.log(newArticle);
 
@@ -34,6 +49,7 @@ const UpdateArticle = () => {
 
     return (
         <div className='flex justify-center items-center h-full '>
+            <ToastContainer position="top-center"/>
             <form
                 className='shadow-lg p-10 rounded-md flex flex-wrap gap-3 max-w-3xl justify-between bg-white'
                 onSubmit={handleSubmit(submit)}
@@ -56,7 +72,7 @@ const UpdateArticle = () => {
                     <label className='mb-3' htmlFor='content'>
                         Content
                     </label>
-                    <textarea defaultValue={article ? article.content : null} className="h-32" type='text' id='content' {...register("content")} />
+                    <textarea defaultValue={article ? article.content : null} className="h-52" type='text' id='content' {...register("content")} />
                 </div>
 
                 <div className='flex flex-col w-full max-w-xs'>
@@ -70,7 +86,14 @@ const UpdateArticle = () => {
                     <label className='mb-3' htmlFor='description'>
                         Description
                     </label>
-                    <input defaultValue={article ? article.description : null} type='text' id='description' {...register("description")} />
+                    <textarea defaultValue={article ? article.description : null} className="h-32" type='text' id='description' {...register("description")} />
+                </div>
+
+                <div className='flex flex-col w-full max-w-xs'>
+                    <label className='mb-3' htmlFor='tags'>
+                        Tags
+                    </label>
+                    <input defaultValue={article ? article.tags : null} type='text' id='tags' {...register("tags")} />
                 </div>
 
 

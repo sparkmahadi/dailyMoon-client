@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import fetchArticleDetails from './../redux/thunk/fetchArticleDetails';
+import deleteArticle from './../redux/thunk/deleteArticle';
 
 const BlogDetails = () => {
     // const [article, setArticle] = useState({});
@@ -13,6 +14,13 @@ const BlogDetails = () => {
         dispatch(fetchArticleDetails(id))
     }, [dispatch, id]);
 
+    const removeArticle = blog => {
+        const confirmation = window.confirm("Are you sure to delete the news?")
+
+        if (confirmation) {
+            dispatch(deleteArticle(blog))
+        }
+    }
     console.log(article);
     return (
         <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
@@ -41,28 +49,31 @@ const BlogDetails = () => {
                         {article.description}
                     </p>
                     <div className="flex space-x-4">
-                        <div className="flex items-center">
-                            <a href="/" aria-label="Author" title="Author" className="mr-3">
-                                <img
-                                    src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
-                                    alt="avatar"
-                                    className="object-cover w-10 h-10 rounded-full shadow-sm"
-                                />
-                            </a>
-                            <div>
-                                <a
-                                    href="/"
-                                    aria-label="Author"
-                                    title="Author"
-                                    className="font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-400"
-                                >
-                                    {article.author}
-                                </a>
-                                <p className="text-sm font-medium leading-4 text-gray-600">
-                                    Author
-                                </p>
-                            </div>
-                        </div>
+                    <div className=" space-x-4">
+                                    <div className="pb-5">
+                                        <div className='flex items-center gap-3'>
+                                            <p className="font-semibold">
+                                                Author :
+                                            </p>
+                                            <p className=""
+                                            >
+                                                {article.author}
+                                            </p>
+
+                                        </div>
+
+                                        <div className='flex items-center gap-3 mb-5'>
+                                            <p className='font-semibold'>Tags:</p>
+                                            <p>{article.tags}</p>
+                                        </div>
+
+                                        <div className='flex justify-center items-center gap-5'>
+                                            <Link to={`/articles/update/${article._id}`}><button className="btn bg-gray-400 py-1 px-5 rounded-lg text-white font-semibold">Update</button></Link>
+                                            <button onClick={() => removeArticle(article)} className="btn bg-red-400 py-1 px-5 rounded-lg text-white font-semibold">Delete</button>
+                                        </div>
+                                    </div>
+
+                                </div>
 
                     </div>
                 </div>

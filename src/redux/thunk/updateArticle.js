@@ -1,4 +1,5 @@
 
+import { toast } from 'react-toastify';
 const updateArticle = (article) =>{
     return async(dispatch, getState) =>{
         const res = await fetch(`http://localhost:5000/articles/${article._id}`, {
@@ -12,6 +13,7 @@ const updateArticle = (article) =>{
         console.log(data);
 
         if(data.acknowledged){
+            toast.success("Updated successfully")
             // dispatch(updateArticles(article))
         }
     }

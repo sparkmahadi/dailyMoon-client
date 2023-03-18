@@ -16,15 +16,15 @@ const Blogs = () => {
 
     console.log(loading);
 
-    const removeArticle = blog =>{
+    const removeArticle = blog => {
         const confirmation = window.confirm("Are you sure to delete the news?")
 
-        if(confirmation){
+        if (confirmation) {
             dispatch(deleteArticle(blog))
         }
     }
 
-    if(loading){
+    if (loading) {
         return <Spinner></Spinner>
     }
     return (
@@ -33,7 +33,7 @@ const Blogs = () => {
 
                 {
                     blogs.map(blog =>
-                        <div key={blog._id} className="overflow-hidden transition-shadow duration-300 bg-white rounded">
+                        <div key={blog._id} className="overflow-hidden transition-shadow duration-300 bg-white rounded border relative">
                             <Link to={`/articles/${blog._id}`} href="/" aria-label="Article">
                                 <img
                                     src={blog.urlToImage}
@@ -41,7 +41,7 @@ const Blogs = () => {
                                     alt=""
                                 />
                             </Link>
-                            <div className="py-5">
+                            <div className="p-5">
                                 <p className="mb-2 text-xs font-semibold text-gray-600 uppercase">
                                     {blog.postedDate}
                                 </p>
@@ -53,34 +53,29 @@ const Blogs = () => {
                                     <p className="text-2xl font-bold leading-5">{blog.title.slice(0, 25)}...</p>
                                 </a>
                                 <p className="mb-4 text-gray-700">
-                                    {blog.description.slice(0, 140)}...
+                                    {blog.description.length > 100 ? blog.description.slice(0,130)+'...' : blog.description}...
                                 </p>
-                                <div className="flex space-x-4">
-                                    <div className="flex items-center">
-                                        <a href="/" aria-label="Author" title="Author" className="mr-3">
-                                            <img
-                                                src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
-                                                alt="avatar"
-                                                className="object-cover w-10 h-10 rounded-full shadow-sm"
-                                            />
-                                        </a>
-                                        <div>
-                                            <a
-                                                href="/"
-                                                aria-label="Author"
-                                                title="Author"
-                                                className="font-semibold text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-400"
-                                            >
-                                                {blog.author}
-                                            </a>
-                                            <p className="text-sm font-medium leading-4 text-gray-600">
-                                                Author
+                                <div className=" space-x-4">
+                                    <div className="pb-5">
+                                        <div className='flex items-center gap-3'>
+                                            <p className="font-semibold">
+                                                Author :
                                             </p>
+                                            <p className=""
+                                            >
+                                                {blog.author.length > 10 ? blog.author.slice(0,20)+'...' : blog.author}
+                                            </p>
+
                                         </div>
 
-                                        <div>
-                                            <Link to={`update/${blog._id}`}><button className="btn">Edit</button></Link>
-                                            <button onClick={()=>removeArticle(blog)} className="btn">Delete</button>
+                                        <div className='flex items-center gap-3 mb-5'>
+                                            <p className='font-semibold'>Tags:</p>
+                                            <p>{blog.tags.slice(0,35)}</p>
+                                        </div>
+
+                                        <div className='flex justify-center items-center gap-5 absolute bottom-5 right-5 left-5'>
+                                            <Link to={`update/${blog._id}`}><button className="btn bg-gray-400 py-1 px-5 rounded-lg text-white font-semibold">Update</button></Link>
+                                            <button onClick={() => removeArticle(blog)} className="btn bg-red-400 py-1 px-5 rounded-lg text-white font-semibold">Delete</button>
                                         </div>
                                     </div>
 
