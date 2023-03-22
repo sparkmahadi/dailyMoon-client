@@ -30,14 +30,14 @@ const Blogs = () => {
 
     let content = [];
     console.log(sortBy);
-    if(sortBy === "date"){
-        content = blogs.sort((a, b)=> a.publishedAt - b.publishedAt)
+    if (sortBy === "date") {
+        content = blogs.sort((a, b) => a.publishedAt - b.publishedAt)
     }
-    if(sortBy === "firstUpload"){
-        content = blogs.sort((a, b)=> a.publishedAt - b.publishedAt)
+    if (sortBy === "firstUpload") {
+        content = blogs.sort((a, b) => a.publishedAt - b.publishedAt)
     }
-    if(sortBy === "lastUpload"){
-        content = blogs.sort((a, b)=> b.publishedAt - a.publishedAt)
+    if (sortBy === "lastUpload") {
+        content = blogs.sort((a, b) => b.publishedAt - a.publishedAt)
     }
 
     if (loading) {
@@ -46,31 +46,31 @@ const Blogs = () => {
     return (
         <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
             <div className='flex items-center justify-between'>
-            <div className='flex items-center justify-end gap-5 pb-5'>
-                <h5>Sort By :</h5>
-                <select onChange={(event)=>dispatch(sortingBlogs(event.target.value))} className='rounded-lg py-1' name="sortContent" id="sortContent">
-                    <option value="date">Date/Time</option>
-                    <option value="lastUpload">Last upload</option>
-                    <option value="firstUpload">First upload</option>
-                </select>
-            </div>
-
-            <div className='flex items-center justify-end gap-5 pb-5'>
-                <h5>Filters :</h5>
-                <div className='flex items-center flex-wrap gap-2'>
-                    {
-                        filters.map(filter =>
-                            <p key={filter} className='px-2 py-0.5 cursor-pointer rounded-lg border'>{filter}</p>
-                        )
-                    }
+                <div className='flex items-center justify-end gap-5 pb-5'>
+                    <h5>Sort By :</h5>
+                    <select onChange={(event) => dispatch(sortingBlogs(event.target.value))} className='rounded-lg py-1' name="sortContent" id="sortContent">
+                        <option value="date">Date/Time</option>
+                        <option value="lastUpload">Last upload</option>
+                        <option value="firstUpload">First upload</option>
+                    </select>
                 </div>
-            </div>
+
+                <div className='flex items-center justify-end gap-5 pb-5'>
+                    <h5>Filters :</h5>
+                    <div className='flex items-center flex-wrap gap-2'>
+                        {
+                            filters.map(filter =>
+                                <p key={filter} className='px-2 py-0.5 cursor-pointer rounded-lg border'>{filter}</p>
+                            )
+                        }
+                    </div>
+                </div>
             </div>
 
             <div className="grid gap-5 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
 
                 {
-                    content.map(blog =>
+                    blogs.map(blog =>
                         <div key={blog._id} className="overflow-hidden transition-shadow duration-300 bg-white rounded border relative">
                             <Link to={`/articles/${blog._id}`} href="/" aria-label="Article">
                                 <img
