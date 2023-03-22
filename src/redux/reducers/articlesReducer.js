@@ -1,4 +1,3 @@
-
 import { ADD_CONTENT, GET_CONTENT, LOADING_CONTENT, DELETE_CONTENT, GET_CONTENT_DETAILS, ADD_TO_HISTORY, REMOVE_FROM_HISTORY } from './../actionTypes/actionTypes';
 import { format } from 'date-fns';
 const initialState = {

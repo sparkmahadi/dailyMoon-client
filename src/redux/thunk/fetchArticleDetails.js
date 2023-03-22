@@ -3,7 +3,7 @@ import { loadArticleDetails, updateLoadingState } from './../actions/articlesAct
 const fetchArticleDetails = (id) =>{
     return async(dispatch, getState) =>{
         dispatch(updateLoadingState(true));
-        const res = await fetch(`http://localhost:5000/articles/${id}`);
+        const res = await fetch(`https://daily-planet-server.vercel.app/articles/${id}`);
         const data = await res.json();
 
         console.log(data);

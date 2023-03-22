@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import fetchArticleDetails from './../redux/thunk/fetchArticleDetails';
 import deleteArticle from './../redux/thunk/deleteArticle';
 
 const BlogDetails = () => {
-    // const [article, setArticle] = useState({});
     const article = useSelector(state => state.article.articleDetails)
     const dispatch = useDispatch();
     const { id } = useParams();
