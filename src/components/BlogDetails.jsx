@@ -6,7 +6,7 @@ import deleteArticle from './../redux/thunk/deleteArticle';
 
 const BlogDetails = () => {
     // const [article, setArticle] = useState({});
-    const article = useSelector(state => state.articleDetails)
+    const article = useSelector(state => state.article.articleDetails)
     const dispatch = useDispatch();
     const { id } = useParams();
 

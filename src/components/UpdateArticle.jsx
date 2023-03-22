@@ -11,7 +11,7 @@ const UpdateArticle = () => {
     const dispatch = useDispatch();
 
     const {id} = useParams();
-    const article = useSelector(state => state.articleDetails);
+    const article = useSelector(state => state.article.articleDetails);
     console.log(article);
 
     useEffect(()=>{
@@ -48,7 +48,7 @@ const UpdateArticle = () => {
     };
 
     return (
-        <div className='flex justify-center items-center h-full '>
+        <div className='flex justify-center items-center h-full xl:py-20'>
             <ToastContainer position="top-center"/>
             <form
                 className='shadow-lg p-10 rounded-md flex flex-wrap gap-3 max-w-3xl justify-between bg-white'
@@ -99,7 +99,7 @@ const UpdateArticle = () => {
 
                 <div className='flex justify-between items-center w-full'>
                     <button
-                        className=' px-4 py-3 bg-indigo-500 rounded-md font-semibold text-white text-lg disabled:bg-gray-500'
+                        className='btn bg-gray-400 py-1 px-5 rounded-lg text-white font-semibold'
                         type='submit'
                     >
                         Submit

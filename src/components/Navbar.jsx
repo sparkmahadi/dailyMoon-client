@@ -13,10 +13,9 @@
   ```
 */
 import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
+import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 const user = {
     name: 'Tom Cook',
@@ -26,7 +25,6 @@ const user = {
 }
 const navigation = [
     { name: 'Home', href: '/', current: true },
-    { name: 'Articles', href: '/articles', current: false },
     { name: 'Reading History', href: '/reading-history', current: false },
     { name: 'Add article', href: '/articles/add', current: false },
 ]
@@ -52,25 +50,7 @@ export default function Navbar() {
                                     <p className='text-xl font-semibold'>The Daily Planet</p>
                                 </div>
                             </div>
-                            <div className="relative z-0 flex flex-1 items-center justify-center px-2 sm:absolute sm:inset-0">
-                                <div className="w-full sm:max-w-xs">
-                                    <label htmlFor="search" className="sr-only">
-                                        Search
-                                    </label>
-                                    <div className="relative">
-                                        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                            <MagnifyingGlassIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-                                        </div>
-                                        <input
-                                            id="search"
-                                            name="search"
-                                            className="block w-full rounded-md border border-gray-300 bg-white py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:border-indigo-500 focus:text-gray-900 focus:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
-                                            placeholder="Search"
-                                            type="search"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
+                            
                             <div className="relative z-10 flex items-center lg:hidden">
                                 {/* Mobile menu button */}
                                 <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
@@ -131,17 +111,16 @@ export default function Navbar() {
                         </div>
                         <nav className="hidden lg:flex lg:space-x-8 lg:py-2" aria-label="Global">
                             {navigation.map((item) => (
-                                <a
+                                <NavLink
                                     key={item.name}
-                                    href={item.href}
+                                    to={item.href}
                                     className={classNames(
-                                        item.current ? 'bg-gray-100 text-gray-900' : 'text-gray-900 hover:bg-gray-50 hover:text-gray-900',
+                                        item.current ? '' : 'text-gray-900',
                                         'rounded-md py-2 px-3 inline-flex items-center text-sm font-medium'
                                     )}
-                                    aria-current={item.current ? 'page' : undefined}
                                 >
                                     {item.name}
-                                </a>
+                                </NavLink>
                             ))}
                         </nav>
                     </div>
@@ -156,10 +135,9 @@ export default function Navbar() {
                                 >
                                     <Disclosure.Button
                                         className={classNames(
-                                            item.current ? 'bg-gray-100 text-gray-900' : 'text-gray-900 hover:bg-gray-50 hover:text-gray-900',
+                                            item.current ? 'bg-gray-100 text-gray-900' : 'text-gray-900',
                                             'block rounded-md py-2 px-3 text-base font-medium'
                                         )}
-                                        aria-current={item.current ? 'page' : undefined}
                                     >
                                         {item.name}
                                     </Disclosure.Button>

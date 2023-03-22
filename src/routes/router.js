@@ -4,6 +4,7 @@ import Main from "../layouts/Main";
 import BlogDetails from './../components/BlogDetails';
 import AddArticle from './../components/AddArticle';
 import UpdateArticle from './../components/UpdateArticle';
+import ReadingHistory from "../components/ReadingHistory";
 
 const router = createBrowserRouter([
     {
@@ -11,7 +12,7 @@ const router = createBrowserRouter([
         element: <Main></Main>,
         children: [
             {
-                path: '/articles',
+                path: '/',
                 element: <Blogs></Blogs>
             },
             {
@@ -25,7 +26,11 @@ const router = createBrowserRouter([
             {
                 path: '/articles/update/:id',
                 element: <UpdateArticle></UpdateArticle>
-            }
+            },
+            {
+                path: 'reading-history',
+                element: <ReadingHistory></ReadingHistory>
+            },
         ]
     }
 ])

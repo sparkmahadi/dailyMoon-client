@@ -1,5 +1,5 @@
-import { GET_CONTENT, GET_CONTENT_DETAILS, SORT_BY, UPDATE_CONTENT } from "../actionTypes/actionTypes"
-import { ADD_CONTENT, DELETE_CONTENT, LOADING_CONTENT, FILTER_BY_TAGS } from './../actionTypes/actionTypes';
+import { GET_CONTENT, GET_CONTENT_DETAILS, REMOVE_FROM_HISTORY, SORT_BY, UPDATE_CONTENT } from "../actionTypes/actionTypes"
+import { ADD_CONTENT, DELETE_CONTENT, LOADING_CONTENT, FILTER_BY_TAGS, ADD_TO_HISTORY } from './../actionTypes/actionTypes';
 
 export const loadArticles = (data) =>{
     return{
@@ -43,10 +43,10 @@ export const updateLoadingState = (data) =>{
     }
 };
 
-export const filteringBlogs = (filters) =>{
+export const filteringBlogs = (filter) =>{
     return{
         type: FILTER_BY_TAGS,
-        payload: filters
+        payload: filter
     }
 };
 
@@ -56,3 +56,17 @@ export const sortingBlogs = (data) =>{
         payload: data
     }
 };
+
+export const addToReadingHistory = data =>{
+    return{
+        type: ADD_TO_HISTORY,
+        payload: data
+    }
+}
+
+export const removeFromReadingHistory = data =>{
+    return{
+        type: REMOVE_FROM_HISTORY,
+        payload: data
+    }
+}

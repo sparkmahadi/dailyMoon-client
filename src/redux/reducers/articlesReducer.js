@@ -1,5 +1,6 @@
 
-import { ADD_CONTENT, GET_CONTENT, LOADING_CONTENT, DELETE_CONTENT, GET_CONTENT_DETAILS } from './../actionTypes/actionTypes';
+import { ADD_CONTENT, GET_CONTENT, LOADING_CONTENT, DELETE_CONTENT, GET_CONTENT_DETAILS, ADD_TO_HISTORY, REMOVE_FROM_HISTORY } from './../actionTypes/actionTypes';
+import { format } from 'date-fns';
 const initialState = {
     articles: [],
     articleDetails: {},
@@ -34,6 +35,29 @@ const articlesReducer = (state = initialState, action) => {
         case DELETE_CONTENT:
             return {
                 ...state, articles: state.articles.filter(article => article._id !== action.payload._id)
+            }
+
+        case ADD_TO_HISTORY:
+            const currentTime = format(new Date(), "PPpp");
+            const existing = state.readingHistories.find(article => article._id === action.payload._id);
+            console.log('existing',existing);
+            if(!existing){
+                console.log('inside condition');
+                action.payload.readAt = currentTime;
+                return{
+                    ...state, readingHistories: [...state.readingHistories, action.payload]
+                }
+            }
+            else{
+                existing.readAt= currentTime;
+                return{
+                    ...state, readingHistories: [...state.readingHistories.filter(article => article._id !== action.payload._id), existing]
+                }
+            }
+
+        case REMOVE_FROM_HISTORY:
+            return{
+                ...state, readingHistories: state.readingHistories.filter(article => article._id !== action.payload._id)
             }
 
         default:

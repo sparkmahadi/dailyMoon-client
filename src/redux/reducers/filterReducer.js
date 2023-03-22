@@ -14,9 +14,17 @@ const filterReducer = (state = initialState, action) => {
             }
 
         case FILTER_BY_TAGS:
-            return {
-                ...state,
+            if(!state.tags.includes(action.payload)){
+                return {
+                    ...state, tags: [...state.tags, action.payload]
             }
+            }
+            else{
+                return{
+                    ...state, tags: state.tags.filter(tag => tag !== action.payload)
+                }
+            }
+
         default:
             return state;
     }
