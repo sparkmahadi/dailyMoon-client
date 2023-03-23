@@ -80,7 +80,7 @@ const Blogs = () => {
                 {
                     content.map(blog =>
                         <div key={blog._id} className="overflow-hidden transition-shadow duration-300 bg-white rounded border relative">
-                            <Link onClick={()=>dispatch(addToReadingHistory(blog))} to={`/articles/${blog._id}`} aria-label="Article">
+                            <Link onClick={() => dispatch(addToReadingHistory(blog))} to={`/articles/${blog._id}`} aria-label="Article">
                                 <img
                                     src={blog.urlToImage}
                                     className="object-cover w-full h-64 rounded"
@@ -147,6 +147,11 @@ const Blogs = () => {
                 }
 
             </div>
+
+            {
+                !content.length &&
+                <p className='text-center text-xl font-semibold py-20'>Sorry! No related News Found!!!</p>
+            }
         </div>
     );
 };
